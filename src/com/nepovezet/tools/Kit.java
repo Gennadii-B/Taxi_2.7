@@ -67,7 +67,6 @@ public class Kit<K> implements Iterable<K> {
 
     @Override
     public void forEach(Consumer action) {
-
     }
 
     private void volumeCheck(int index) {
