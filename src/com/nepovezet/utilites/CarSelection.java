@@ -24,7 +24,7 @@ public class CarSelection {
 
     public Driver search(Order order) {
         needDriver = null;
-        for (Driver driver : dataBase.drivers) {
+        for (Driver driver : dataBase.getDrivers()) {
             if (driver.getCar().getCarClass() == order.getNeedCarClass() &&
                     driver.getCar().isHaveBabySeat() == order.isNeedBabySeat() &&
                     driver.getCar().isHaveSmoke() == order.isNeedSmoke() &&

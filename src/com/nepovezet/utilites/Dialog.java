@@ -4,13 +4,11 @@ import com.nepovezet.entity.Car;
 import com.nepovezet.entity.Driver;
 import com.nepovezet.entity.Order;
 import com.nepovezet.tools.TaxiException;
-import ru.goldtaxi.tools.SystemOutPrint;
 
 import static com.nepovezet.tools.SOPrint.println;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -99,7 +97,7 @@ public class Dialog {
         needOrder = new Order(idOrders,
                 start, end, answerBabySeat,
                 answerNeedSmoke, answerCarClass);
-        dataBase.baseOrders.add(needOrder);
+        dataBase.getBaseOrders().insert(needOrder);
 
         return needOrder;
     }
