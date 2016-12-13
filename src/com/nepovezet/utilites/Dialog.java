@@ -8,6 +8,7 @@ import com.nepovezet.tools.TaxiException;
 import static com.nepovezet.tools.SOPrint.println;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -33,26 +34,9 @@ public class Dialog {
     public Texts texts = new Texts();
     Order needOrder;
     boolean isOk = true;
+    Pattern pattern = Pattern.compile("^([А-Я]?[а-я]*\\s){2,4}\\s*\\d+\\-\\d+$");
+    Matcher matcher;
 
-    public void quLocale () throws Exception{
-        println("1. Русский\n2. English");
-        String answerLocale = "";
-        Pattern pattern = Pattern.compile("[12]");
-
-        while(isOk){
-            answerLocale = reader.readLine();
-            Matcher matcher = pattern.matcher(answerLocale);
-            if(matcher.matches()) isOk = false;
-            else System.out.println("incorrect input");
-        }
-
-
-        if(answerLocale.equals("1"))texts.setNeedLocale(texts.getRuLocale());
-        else if(answerLocale.equals("2"))texts.setNeedLocale(texts.getEnLocale());
-        texts = new Texts();
-        isOk = true;
-
-    }
 
     public Order newOrder() throws Exception {
 
@@ -61,27 +45,13 @@ public class Dialog {
         boolean answerBabySeat;
         boolean answerNeedSmoke;
         int answerCarClass;
-        Pattern pattern = Pattern.compile("^([А-Я]?[а-я]*\\s){2,4}\\s*\\d+\\-\\d+$");
-        Matcher matcher;
 
         println(texts.TEXT_START_POINT);
-        while(isOk) {
-            start = reader.readLine();
-            matcher = pattern.matcher(start);
-            if(matcher.matches())
-                isOk = false;
-            else System.out.println(texts.TEXT_EXC_POINT);
-        }
+        start = setAddress();
+
+
         println(texts.TEXT_END_POINT);
-        isOk = true;
-        while(isOk) {
-            end = reader.readLine();
-            matcher = pattern.matcher(end);
-            if(matcher.matches())
-                isOk = false;
-            else System.out.println(texts.TEXT_EXC_POINT);
-        }
-        isOk = true;
+        end = setAddress();
 
         println(texts.TEXT_QU_BABY_SEAT);
         answerBabySeat = setAnswerBool();
@@ -141,6 +111,18 @@ public class Dialog {
             System.out.println(exc);
             return false;
         }
+    }
+
+    private String setAddress() throws IOException{
+        boolean isOk = true;
+        while(isOk) {
+            String address = reader.readLine();
+            matcher = pattern.matcher(address);
+            if(matcher.matches())
+                return address;
+            else System.out.println(texts.TEXT_EXC_POINT);
+        }
+        return null;
     }
 
     public static int getIdOrders() {
