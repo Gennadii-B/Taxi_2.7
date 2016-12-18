@@ -8,54 +8,55 @@ public class Driver {
     private String name;
     private String surname;
     private int phoneNumber;
-    private Car car;
+    private String status = STATUS_FREE;
+    private Cars car;
     private int id;
+    private boolean isHaveBabySeat;
+    private boolean isHaveSmoke;
 
-    public Driver(String name, String surname, int phoneNumber, Car car, int id) {
+    public static final String STATUS_FREE = "свободен";
+    public static final String STATUS_RESERVED = "занят";
+
+    public Driver(String name, String surname, int phoneNumber, Cars car, int id,
+                  boolean isHaveBabySeat, boolean isHaveSmoke) {
         this.name = name;
         this.surname = surname;
         this.phoneNumber = phoneNumber;
         this.car = car;
         this.id = id;
+        this.isHaveBabySeat = isHaveBabySeat;
+        this.isHaveSmoke = isHaveSmoke;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getSurname() {
         return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
     }
 
     public int getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public Car getCar() {
+    public Cars getCar() {
         return car;
     }
 
-    public void setCar(Car car) {
-        this.car = car;
+    public boolean isHaveBabySeat() {
+        return isHaveBabySeat;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public boolean isHaveSmoke() {
+        return isHaveSmoke;
     }
 }

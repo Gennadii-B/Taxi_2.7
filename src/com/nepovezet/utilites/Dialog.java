@@ -1,6 +1,6 @@
 package com.nepovezet.utilites;
 
-import com.nepovezet.entity.Car;
+import com.nepovezet.entity.Cars;
 import com.nepovezet.entity.Driver;
 import com.nepovezet.entity.Order;
 import com.nepovezet.tools.TaxiException;
@@ -33,32 +33,27 @@ public class Dialog {
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     public Texts texts = new Texts();
     Order needOrder;
-    boolean isOk = true;
     Pattern pattern = Pattern.compile("^([А-Я]?[а-я]*\\s){2,4}\\s*\\d+\\-\\d+$");
     Matcher matcher;
 
 
     public Order newOrder() throws Exception {
 
-        String start = "";
-        String end = "";
+        String start;
+        String end;
         boolean answerBabySeat;
         boolean answerNeedSmoke;
         int answerCarClass;
-
+//ввод адресов маршрута
         println(texts.TEXT_START_POINT);
         start = setAddress();
-
-
         println(texts.TEXT_END_POINT);
         end = setAddress();
 
         println(texts.TEXT_QU_BABY_SEAT);
         answerBabySeat = setAnswerBool();
-
         println(texts.TEXT_QU_SMOKE);
         answerNeedSmoke = setAnswerBool();
-
         println(texts.TEXT_QU_CLASS);
         answerCarClass = setAnswerCarClass();
 
@@ -78,7 +73,7 @@ public class Dialog {
     }
     //дает всю инфу о нужном авто
     public void reserveCar(Driver driver){
-        driver.getCar().setStatus(Car.STATUS_RESERVED);
+        driver.setStatus(Driver.STATUS_RESERVED);
         needOrder.setNeedDriver(driver);
         texts.textAnswerReservedCar(driver);
     }
@@ -89,12 +84,12 @@ public class Dialog {
             answer = reader.readLine();
             if(answer.equals("Y") || answer.equals("N"));
             else throw new TaxiException();
-            if(answer.equals("Y"))return Car.CLASS_BUSYNESS;
-            else return Car.CLASS_ECONOMIC;
+            if(answer.equals("Y"))return Cars.CLASS_BUSYNESS;
+            else return Cars.CLASS_ECONOMIC;
 
         }catch(TaxiException exc){
             System.out.println(exc);
-            return Car.CLASS_ECONOMIC;
+            return Cars.CLASS_ECONOMIC;
         }
     }
 

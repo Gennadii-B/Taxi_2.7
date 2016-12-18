@@ -1,12 +1,9 @@
 package com.nepovezet.utilites;
 
-import com.nepovezet.entity.Car;
 import com.nepovezet.entity.Driver;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
-
-import static com.nepovezet.tools.SOPrint.println;
 
 /**
  * Created by N on 24.11.2016.

@@ -1,7 +1,6 @@
 package com.nepovezet.utilites;
 
 import com.nepovezet.entity.Driver;
-import com.nepovezet.entity.Car;
 import com.nepovezet.entity.Order;
 
 /**
@@ -26,9 +25,9 @@ public class CarSelection {
         needDriver = null;
         for (Driver driver : dataBase.getDrivers()) {
             if (driver.getCar().getCarClass() == order.getNeedCarClass() &&
-                    driver.getCar().isHaveBabySeat() == order.isNeedBabySeat() &&
-                    driver.getCar().isHaveSmoke() == order.isNeedSmoke() &&
-                    driver.getCar().getStatus() == Car.STATUS_FREE) {
+                    driver.isHaveBabySeat() == order.isNeedBabySeat() &&
+                    driver.isHaveSmoke() == order.isNeedSmoke() &&
+                    driver.getStatus() == Driver.STATUS_FREE) {
 
                         needDriver = driver;
                         break;
