@@ -8,6 +8,11 @@ import com.nepovezet.utilites.OrderReader;
 
 /**
  * Created by user on 23.12.2016.
+ * поток отвечающий за подбор нужных авто
+ * если с первой попытки находится автомобиль то данные об авто записываются
+ * в заявку и заявка отправляется на исполнение в поток "ExecEmulationThread"
+ * в случае же ненахождения авто с первой попытки просит подождать клиента минуту
+ * после чего производится повторный поиск
  */
 public class OrderBookingThread implements Runnable {
 
@@ -27,10 +32,11 @@ public class OrderBookingThread implements Runnable {
         doSearchNeedCar();
         doSecondSearchNeedCar();
     }
-
+//проверяет автомобили на соответствия требованиям данной заявки
     private void doSearchNeedCar(){
         counter++;
         needDriver = carSelection.search(order);
+//если найден создается поток исполнения
         if(needDriver != null){
             order.setNeedDriver(needDriver);
             isSwitchFound = true;
@@ -43,21 +49,23 @@ public class OrderBookingThread implements Runnable {
     }
 
     private void doSecondSearchNeedCar(){
+//проверка на необходимость повторного поиска
         if(!isSwitchFound) {
             System.out.printf("%s %d %s %s",
                     orderReader.texts.TEXT_NUMER_ORDER, order.getId(),
                     orderReader.texts.TEXT_ANSWER_NEGATIVE, "\n");
             isSwitchFound = false;
-            threadSleep();
+            threadSleep(60);
             doSearchNeedCar();
+//в случае ненахождения авто сообщает клиенту о невозможности исполнения заказа
             if(needDriver == null)
                 System.out.println(orderReader.texts.TEXT_NO_CAR);
         }
     }
 
-    private void threadSleep(){
+    private void threadSleep(int sec){
         try{
-            Thread.sleep(60_000);
+            Thread.sleep(sec * 1000);
         }catch (InterruptedException e){
             System.out.println(e);
         }

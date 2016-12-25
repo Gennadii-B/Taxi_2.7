@@ -15,7 +15,7 @@ public class main {
         OrderReader orderReader = OrderReader.getInstance();
         LanguageSelection languageSelection = new LanguageSelection();
 
-        System.out.println("Taxi nepovezet v1.7\n");
+        System.out.println("Taxi nepovezet v2.7\n");
 
         languageSelection.quLocale();
         System.out.println(orderReader.texts.TEXT_TEST);

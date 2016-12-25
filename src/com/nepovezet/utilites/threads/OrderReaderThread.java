@@ -6,6 +6,7 @@ import com.nepovezet.utilites.OrderReader;
 
 /**
  * Created by user on 23.12.2016.
+ * безперебойно принимает заказы
  */
 public class OrderReaderThread implements Runnable {
 

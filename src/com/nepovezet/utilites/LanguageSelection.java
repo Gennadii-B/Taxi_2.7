@@ -27,9 +27,12 @@ public class LanguageSelection {
             else System.out.println("incorrect input");
         }
 
-
-        if(answerLocale.equals("1")) orderReader.texts.setNeedLocale(orderReader.texts.getRuLocale());
-        else if(answerLocale.equals("2")) orderReader.texts.setNeedLocale(orderReader.texts.getEnLocale());
+        //установка русской локали
+        if(answerLocale.equals("1"))
+            orderReader.texts.setNeedLocale(orderReader.texts.getRuLocale());
+        //установка английской локали
+        else if(answerLocale.equals("2"))
+            orderReader.texts.setNeedLocale(orderReader.texts.getEnLocale());
         orderReader.texts = new Texts();
         isOk = true;
 

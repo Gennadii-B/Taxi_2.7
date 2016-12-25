@@ -6,9 +6,8 @@ import com.nepovezet.entity.Order;
 /**
  * Created by N on 12.11.2016.
  * Здесь происходит перебор автомобилей, в случае соответствия условиям
- * вызывается метод OrderReader.answerReservedCar(driver) который сообщает
- * всю нужную информацию об автомобиле.
- * В случае несоответствия вызывается OrderReader.negativeAnswer()
+ * возвращается нужный водитель с автомобилем
+ *
  */
 public class CarSelection {
     private static CarSelection ourInstance = new CarSelection();

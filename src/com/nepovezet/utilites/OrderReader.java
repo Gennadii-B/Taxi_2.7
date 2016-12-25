@@ -47,7 +47,7 @@ public class OrderReader {
         start = getAddress();
         println(texts.TEXT_END_POINT);
         end = getAddress();
-
+//требования заказчика (детское сидение, курящий салон, класс авто)
         println(texts.TEXT_QU_BABYSAT);
         answerBabySeat = getAnswerYN();
         println(texts.TEXT_QU_SMOKE);
@@ -56,14 +56,14 @@ public class OrderReader {
         answerCarClass = getAnswerNeedCarClass();
 
         idOrders++;
-
+//создание объекта заказа для дальнейшей обработки
         surrogateOrder = new Order(idOrders,
                 start, end, answerBabySeat,
                 answerNeedSmoke, answerCarClass);
 
         return surrogateOrder;
     }
-
+//узнает какой класс авто нужен заказчику
     private int getAnswerNeedCarClass() {
         String answer;
         try{
@@ -81,7 +81,7 @@ public class OrderReader {
             return Cars.CLASS_ECONOMIC;
         }
     }
-
+//вопрос на да/нет
     public boolean getAnswerYN() {
         String answer;
         try{
@@ -99,7 +99,7 @@ public class OrderReader {
             return false;
         }
     }
-
+// узнает точку маршрута у заказчика
     private String getAddress() {
         boolean isOk = true;
         while(isOk) {

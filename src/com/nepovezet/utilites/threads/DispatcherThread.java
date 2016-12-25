@@ -5,6 +5,9 @@ import com.nepovezet.utilites.DataBase;
 
 /**
  * Created by user on 23.12.2016.
+ * поток который в случае заполнения "getActualOrders" поочередно вынимает
+ * заказы и отправляет в собственный поток "OrderBookingThread" который в свою
+ * очередь занимется подбором нужного авто
  */
 public class DispatcherThread implements Runnable {
     DataBase dataBase = DataBase.getInstance();
@@ -17,6 +20,7 @@ public class DispatcherThread implements Runnable {
                 order = dataBase.getActualOrders().pollLast();
 
             if(order != null) {
+                //создание потока для каждого полученного заказа
                 new Thread(new OrderBookingThread(order)).start();
                 order = null;
             }

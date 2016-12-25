@@ -10,6 +10,8 @@ import  static com.nepovezet.tools.SOPrint.println;
 
 /**
  * Created by user on 24.12.2016.
+ * эмуляция 10 заказов. С переодичностью 1-6 секунд вбрасывает
+ * заказы на исполнение
  */
 public class Test  implements Runnable{
 
@@ -28,6 +30,8 @@ public class Test  implements Runnable{
         if(isDo)doTest();
     }
 
+//эмулирует заполнение полей заказа после чего программа
+//должна обработать этот заказ
     private void doTest(){
             for(int i = 0; i < 10; i++) {
                 Order testOrder;

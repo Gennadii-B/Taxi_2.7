@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 /**
  * Created by N on 24.11.2016.
+ * тексты используемые в программе с возможностью выбора языка
  */
 public class Texts {
 

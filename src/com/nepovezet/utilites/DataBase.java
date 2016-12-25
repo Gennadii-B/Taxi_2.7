@@ -11,6 +11,7 @@ import java.util.LinkedList;
  * Created by N on 12.11.2016.
  * При запуске программы в конструкторе класса автоматически инициализируется
  * лист водителей c автомобилями
+ * а так же лист с тестовыми заказами
  */
 public class DataBase {
     private static DataBase ourInstance = new DataBase();
