@@ -1,33 +1,33 @@
 package com.nepovezet;
 
-import com.nepovezet.entity.Driver;
-import com.nepovezet.entity.Order;
-import com.nepovezet.utilites.CarSelection;
-import com.nepovezet.utilites.Dialog;
 import com.nepovezet.utilites.LanguageSelection;
+import com.nepovezet.utilites.threads.Test;
+import com.nepovezet.utilites.OrderReader;
+import com.nepovezet.utilites.threads.DispatcherThread;
+import com.nepovezet.utilites.threads.OrderReaderThread;
 
 /**
  * Created by N on 11.11.2016.
  */
 public class main {
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
 
-        Dialog dialog = Dialog.getInstance();
-        CarSelection carSelection = CarSelection.getInstance();
-        Driver needDriver;
-        Order order;
-        LanguageSelection ls = new LanguageSelection();
+        OrderReader orderReader = OrderReader.getInstance();
+        LanguageSelection languageSelection = new LanguageSelection();
 
-        ls.quLocale();
+        System.out.println("Taxi nepovezet v1.7\n");
 
-        while(true) {
-            order = dialog.newOrder();
-            needDriver = carSelection.search(order);
-            if(needDriver == null){
-                dialog.negativeAnswer();
-                continue;
-            }
-            dialog.reserveCar(needDriver);
-        }
+        languageSelection.quLocale();
+        System.out.println(orderReader.texts.TEXT_TEST);
+
+        Thread test = new Thread(new Test(orderReader.getAnswerYN()));
+        Thread orderReaderThread = new Thread(new OrderReaderThread());
+        Thread dispatcherThread = new Thread(new DispatcherThread());
+
+        test.start();
+        orderReaderThread.start();
+        dispatcherThread.start();
+
+
     }
 }

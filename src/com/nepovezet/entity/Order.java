@@ -11,7 +11,7 @@ public class Order {
     private boolean isNeedBabySeat;
     private boolean isNeedSmoke;
     private int needCarClass;
-    private Driver needDriver;
+    private Driver needDriver = null;
 
     public Order(int id, String startPoint, String endPoint, boolean isNeedBabySeat,
                  boolean isNeedSmoke, int needCarClass) {
@@ -35,7 +35,25 @@ public class Order {
         return needCarClass;
     }
 
-    public void setNeedDriver(Driver needDriver) {
+    public  void setNeedDriver(Driver needDriver) {
         this.needDriver = needDriver;
     }
+
+    public Driver getNeedDriver() {
+        return needDriver;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getStartPoint() {
+        return startPoint;
+    }
+
+    public String getEndPoint() {
+        return endPoint;
+    }
+
+
 }

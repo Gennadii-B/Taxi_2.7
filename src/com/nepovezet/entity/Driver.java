@@ -8,7 +8,7 @@ public class Driver {
     private String name;
     private String surname;
     private int phoneNumber;
-    private String status = STATUS_FREE;
+    private volatile String status = STATUS_FREE;
     private Cars car;
     private int id;
     private boolean isHaveBabySeat;

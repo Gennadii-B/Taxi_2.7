@@ -1,6 +1,6 @@
 package com.nepovezet.tools;
 
-import com.nepovezet.utilites.Dialog;
+import com.nepovezet.utilites.OrderReader;
 import com.nepovezet.utilites.Texts;
 
 /**
@@ -8,8 +8,8 @@ import com.nepovezet.utilites.Texts;
  */
 public class TaxiException extends Exception {
 
-    Dialog dialog = Dialog.getInstance();
-    Texts texts = dialog.texts;
+    OrderReader orderReader = OrderReader.getInstance();
+    Texts texts = orderReader.texts;
 
     public String toString(){
         return  texts.TEXT_EXC;}

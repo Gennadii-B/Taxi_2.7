@@ -5,23 +5,23 @@ package com.nepovezet.entity;
  */
 public enum Cars {
 
-    TAXI_A0("OG 356", "Peugeot", Cars.CLASS_BUSYNESS),
+    TAXI_A0("OG 356", "Peugeot", Cars.CLASS_BUSINESS),
     TAXI_A1("DG 743", "LADA", Cars.CLASS_ECONOMIC),
     TAXI_A2("GJ 833", "LADA", Cars.CLASS_ECONOMIC),
     TAXI_A3("QA 345", "LADA", Cars.CLASS_ECONOMIC),
-    TAXI_A4("LI 753", "Skoda", Cars.CLASS_BUSYNESS),
+    TAXI_A4("LI 753", "Skoda", Cars.CLASS_BUSINESS),
     TAXI_A5("RT 742", "LADA", Cars.CLASS_ECONOMIC),
     TAXI_A6("NM 886", "LADA", Cars.CLASS_ECONOMIC),
     TAXI_A7("WE 777", "LADA", Cars.CLASS_ECONOMIC),
-    TAXI_A8("ME 126", "BMW", Cars.CLASS_BUSYNESS),
-    TAXI_A9("QK 043", "Chevrolet", Cars.CLASS_BUSYNESS);
+    TAXI_A8("ME 126", "BMW", Cars.CLASS_BUSINESS),
+    TAXI_A9("QK 043", "Chevrolet", Cars.CLASS_BUSINESS);
 
     private String carNumber;
     private String carMark;
     private int carClass;
 
     public static final int CLASS_ECONOMIC = 0;
-    public static final int CLASS_BUSYNESS = 1;
+    public static final int CLASS_BUSINESS = 1;
 
     Cars(String carNumber, String carMark, int carClass) {
         this.carNumber = carNumber;

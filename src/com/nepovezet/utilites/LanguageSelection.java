@@ -10,9 +10,10 @@ import static com.nepovezet.tools.SOPrint.println;
  */
 public class LanguageSelection {
 
+
+
     boolean isOk = true;
-    Matcher matcher;
-    Dialog dialog = Dialog.getInstance();
+    OrderReader orderReader = OrderReader.getInstance();
 
     public void quLocale () throws Exception{
         println("1. Русский\n2. English");
@@ -20,16 +21,16 @@ public class LanguageSelection {
         Pattern pattern = Pattern.compile("[12]");
 
         while(isOk){
-            answerLocale = dialog.reader.readLine();
+            answerLocale = orderReader.reader.readLine();
             Matcher matcher = pattern.matcher(answerLocale);
             if(matcher.matches()) isOk = false;
             else System.out.println("incorrect input");
         }
 
 
-        if(answerLocale.equals("1"))dialog.texts.setNeedLocale(dialog.texts.getRuLocale());
-        else if(answerLocale.equals("2"))dialog.texts.setNeedLocale(dialog.texts.getEnLocale());
-        dialog.texts = new Texts();
+        if(answerLocale.equals("1")) orderReader.texts.setNeedLocale(orderReader.texts.getRuLocale());
+        else if(answerLocale.equals("2")) orderReader.texts.setNeedLocale(orderReader.texts.getEnLocale());
+        orderReader.texts = new Texts();
         isOk = true;
 
     }

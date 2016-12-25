@@ -1,7 +1,6 @@
 package com.nepovezet.utilites;
 
 import com.nepovezet.entity.Cars;
-import com.nepovezet.entity.Driver;
 import com.nepovezet.entity.Order;
 import com.nepovezet.tools.TaxiException;
 
@@ -18,26 +17,25 @@ import java.util.regex.Pattern;
  * этот класс ведет диалог с пользователем, помогает создать заявку на автомобиль и
  * дает ответы на его запрос
  */
-public class Dialog {
-    private static Dialog ourInstance = new Dialog();
+public class OrderReader {
+    private static OrderReader ourInstance = new OrderReader();
 
-    public static Dialog getInstance() {
+    public static OrderReader getInstance() {
         return ourInstance;
     }
 
-    private Dialog() {
+    private OrderReader() {
     }
 
-    DataBase dataBase = DataBase.getInstance();
     static int idOrders = -1;
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     public Texts texts = new Texts();
-    Order needOrder;
-    Pattern pattern = Pattern.compile("^([А-Я]?[а-я]*\\s){2,4}\\s*\\d+\\-\\d+$");
+    Order surrogateOrder;
+    Pattern pattern = Pattern.compile("^([А-ЯA-Zа-яa-z]*\\s){1,4}\\s*\\d+[-\\d+А-ЯA-Zа-яa-z]?$");
     Matcher matcher;
 
 
-    public Order newOrder() throws Exception {
+    public Order newOrder() {
 
         String start;
         String end;
@@ -46,54 +44,45 @@ public class Dialog {
         int answerCarClass;
 //ввод адресов маршрута
         println(texts.TEXT_START_POINT);
-        start = setAddress();
+        start = getAddress();
         println(texts.TEXT_END_POINT);
-        end = setAddress();
+        end = getAddress();
 
-        println(texts.TEXT_QU_BABY_SEAT);
-        answerBabySeat = setAnswerBool();
+        println(texts.TEXT_QU_BABYSAT);
+        answerBabySeat = getAnswerYN();
         println(texts.TEXT_QU_SMOKE);
-        answerNeedSmoke = setAnswerBool();
+        answerNeedSmoke = getAnswerYN();
         println(texts.TEXT_QU_CLASS);
-        answerCarClass = setAnswerCarClass();
+        answerCarClass = getAnswerNeedCarClass();
 
         idOrders++;
 
-        needOrder = new Order(idOrders,
+        surrogateOrder = new Order(idOrders,
                 start, end, answerBabySeat,
                 answerNeedSmoke, answerCarClass);
-        dataBase.getBaseOrders().insert(needOrder);
 
-        return needOrder;
+        return surrogateOrder;
     }
 
-    //вызывается в случае несоответствия ни одного авто
-    public void negativeAnswer(){
-        println(texts.TEXT_ANSWER_NEGATIVE);
-    }
-    //дает всю инфу о нужном авто
-    public void reserveCar(Driver driver){
-        driver.setStatus(Driver.STATUS_RESERVED);
-        needOrder.setNeedDriver(driver);
-        texts.textAnswerReservedCar(driver);
-    }
-    //следующие два метода обрабатывают запросы пользователя
-    private int setAnswerCarClass() throws Exception{
+    private int getAnswerNeedCarClass() {
         String answer;
         try{
             answer = reader.readLine();
             if(answer.equals("Y") || answer.equals("N"));
             else throw new TaxiException();
-            if(answer.equals("Y"))return Cars.CLASS_BUSYNESS;
+            if(answer.equals("Y"))return Cars.CLASS_BUSINESS;
             else return Cars.CLASS_ECONOMIC;
 
         }catch(TaxiException exc){
             System.out.println(exc);
             return Cars.CLASS_ECONOMIC;
+        }catch(IOException e){
+            System.out.println("error in/out");
+            return Cars.CLASS_ECONOMIC;
         }
     }
 
-    private boolean setAnswerBool() throws Exception{
+    public boolean getAnswerYN() {
         String answer;
         try{
             answer = reader.readLine();
@@ -105,24 +94,28 @@ public class Dialog {
         }catch(TaxiException exc){
             System.out.println(exc);
             return false;
+        }catch (IOException e){
+            System.out.println("error in/out");
+            return false;
         }
     }
 
-    private String setAddress() throws IOException{
+    private String getAddress() {
         boolean isOk = true;
         while(isOk) {
-            String address = reader.readLine();
+            try {
+                String address = reader.readLine();
             matcher = pattern.matcher(address);
             if(matcher.matches())
                 return address;
             else System.out.println(texts.TEXT_EXC_POINT);
+            }catch(IOException e) {
+                System.out.println("error in/out");
+            }
         }
         return null;
     }
 
-    public static int getIdOrders() {
-        return idOrders;
-    }
 
 }
 
