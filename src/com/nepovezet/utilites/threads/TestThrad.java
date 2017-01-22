@@ -13,7 +13,7 @@ import  static com.nepovezet.tools.SOPrint.println;
  * эмуляция 10 заказов. С переодичностью 1-6 секунд вбрасывает
  * заказы на исполнение
  */
-public class Test  implements Runnable{
+public class TestThrad implements Runnable{
 
     OrderReader orderReader = OrderReader.getInstance();
     DataBase dataBase = DataBase.getInstance();
@@ -21,8 +21,9 @@ public class Test  implements Runnable{
     private int timeToSleap;
     private boolean isDo;
 
-    public Test(boolean isDo) {
+    public TestThrad(boolean isDo) {
         this.isDo = isDo;
+        new Thread(this).start();
     }
 
     @Override
@@ -33,28 +34,12 @@ public class Test  implements Runnable{
 //эмулирует заполнение полей заказа после чего программа
 //должна обработать этот заказ
     private void doTest(){
-            for(int i = 0; i < 10; i++) {
+            while(!dataBase.getTestOrders().isEmpty()) {
                 Order testOrder;
                 testOrder = dataBase.getTestOrders().pollLast();
-                println(testOrder.getId() + "");
-                println(testOrder.getStartPoint());
-
-                println(testOrder.getEndPoint());
-                if(testOrder.isNeedBabySeat())
-                    println(orderReader.texts.TEXT_WITH_BABYSAT);
-                else println(orderReader.texts.TEXT_WITHOUT_BABYSAT);
-                if(testOrder.isNeedSmoke())
-                    println(orderReader.texts.TEXT_SMOKE);
-                else println(orderReader.texts.TEXT_NO_SMOKE);
-                if(Cars.CLASS_BUSINESS == testOrder.getNeedCarClass())
-                    println(orderReader.texts.TEXT_BUSINESS);
-                if(Cars.CLASS_ECONOMIC == testOrder.getNeedCarClass())
-                    println(orderReader.texts.TEXT_ECONOMIC);
 
                 dataBase.getActualOrders().addFirst(testOrder);
             }
     }
-
-
 
 }

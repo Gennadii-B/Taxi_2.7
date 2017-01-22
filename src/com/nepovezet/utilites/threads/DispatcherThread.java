@@ -26,10 +26,14 @@ public class DispatcherThread implements Runnable {
             }
 
             try{
-                    Thread.sleep(100);
+                    Thread.sleep(10);
                 }catch (InterruptedException e){
                     System.out.println(e);
                 }
         }
+    }
+
+    public DispatcherThread(){
+        new Thread(this).start();
     }
 }

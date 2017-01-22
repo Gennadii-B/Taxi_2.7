@@ -44,7 +44,6 @@ public class OrderBookingThread implements Runnable {
             System.out.printf("%s %d %s",
                     orderReader.texts.TEXT_NUMER_ORDER,
                     order.getId(), orderReader.texts.TEXT_FOUND_CAR);
-        }else if(needDriver == null) {
         }
     }
 

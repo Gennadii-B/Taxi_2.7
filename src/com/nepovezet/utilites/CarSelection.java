@@ -20,17 +20,22 @@ public class CarSelection {
     DataBase dataBase = DataBase.getInstance();
     Driver needDriver;
 
-    public synchronized Driver search(Order order) {
+    public Driver search(Order order) {
+
         for (Driver driver : dataBase.getDrivers()) {
-            if (driver.getStatus() == Driver.STATUS_FREE &&
-                    driver.getCar().getCarClass() == order.getNeedCarClass() &&
-                    driver.isHaveBabySeat() == order.isNeedBabySeat() &&
-                    driver.isHaveSmoke() == order.isNeedSmoke()) {
+            if(driver.getStatus() == Driver.STATUS_FREE)
+                synchronized (driver) {
+                    if (driver.getStatus() == Driver.STATUS_FREE &&
+                            driver.getCar().getCarClass() == order.getNeedCarClass() &&
+                            driver.isHaveBabySeat() == order.isNeedBabySeat() &&
+                            driver.isHaveSmoke() == order.isNeedSmoke()) {
 
                         needDriver = driver;
+                        needDriver.setStatus(Driver.STATUS_RESERVED);
                         return needDriver;
-            }
-        }
+                    }
+                }
+      }
         return null;
     }
 }

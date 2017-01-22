@@ -1,7 +1,7 @@
 package com.nepovezet;
 
 import com.nepovezet.utilites.LanguageSelection;
-import com.nepovezet.utilites.threads.Test;
+import com.nepovezet.utilites.threads.TestThrad;
 import com.nepovezet.utilites.OrderReader;
 import com.nepovezet.utilites.threads.DispatcherThread;
 import com.nepovezet.utilites.threads.OrderReaderThread;
@@ -11,7 +11,6 @@ import com.nepovezet.utilites.threads.OrderReaderThread;
  */
 public class main {
     public static void main(String[] args) throws Exception {
-
         OrderReader orderReader = OrderReader.getInstance();
         LanguageSelection languageSelection = new LanguageSelection();
 
@@ -20,13 +19,15 @@ public class main {
         languageSelection.quLocale();
         System.out.println(orderReader.texts.TEXT_TEST);
 
-        Thread test = new Thread(new Test(orderReader.getAnswerYN()));
-        Thread orderReaderThread = new Thread(new OrderReaderThread());
-        Thread dispatcherThread = new Thread(new DispatcherThread());
 
-        test.start();
-        orderReaderThread.start();
-        dispatcherThread.start();
+
+        new TestThrad(orderReader.getAnswerYN());
+        new OrderReaderThread();
+        new DispatcherThread();
+
+//        test.start();
+//        orderReaderThread.start();
+////        dispatcherThread.start();
 
 
     }

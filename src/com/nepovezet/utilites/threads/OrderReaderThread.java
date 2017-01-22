@@ -20,7 +20,10 @@ public class OrderReaderThread implements Runnable {
             order = orderReader.newOrder();
             dataBase.addOrderFirst(order);
             order = null;
-
         }
+    }
+
+    public OrderReaderThread(){
+        new Thread(this).start();
     }
 }

@@ -17,7 +17,7 @@ public class LanguageSelection {
 
     public void quLocale () throws Exception{
         println("1. Русский\n2. English");
-        String answerLocale = "";
+        String answerLocale = "1";
         Pattern pattern = Pattern.compile("[12]");
 
         while(isOk){

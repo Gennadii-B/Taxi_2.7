@@ -21,6 +21,8 @@ public class DataBase {
      private Kit<Order> archiveOrders = new Kit<>();
      private LinkedList<Order> testOrders = new LinkedList<>();
 
+    private int numberOfTestUsers = 50;
+
     private DataBase() {
         initialize();
         initTestData();
@@ -50,26 +52,29 @@ public class DataBase {
     }
 
     private void initTestData(){
-        testOrders.addFirst(new Order(1000, "Ubileynaya 31e", "Ubileynaya 31e",
-                true, true, Cars.CLASS_BUSINESS));
-        testOrders.addFirst(new Order(1001, "Ubileynaya 31e", "Ubileynaya 31e",
-                true, true, Cars.CLASS_BUSINESS));
-        testOrders.addFirst(new Order(1002, "Ubileynaya 31e", "Ubileynaya 31e",
-                true, true, Cars.CLASS_BUSINESS));
-        testOrders.addFirst(new Order(1003, "Ubileynaya 31e", "Ubileynaya 31e",
-                true, false, Cars.CLASS_ECONOMIC));
-        testOrders.addFirst(new Order(1004, "Ubileynaya 31e", "Ubileynaya 31e",
-                false, false, Cars.CLASS_ECONOMIC));
-        testOrders.addFirst(new Order(1005, "Ubileynaya 31e", "Ubileynaya 31e",
-                false, false, Cars.CLASS_ECONOMIC));
-        testOrders.addFirst(new Order(1006, "Ubileynaya 31e", "Ubileynaya 31e",
-                true, true, Cars.CLASS_BUSINESS));
-        testOrders.addFirst(new Order(1007, "Ubileynaya 31e", "Ubileynaya 31e",
-                true, true, Cars.CLASS_ECONOMIC));
-        testOrders.addFirst(new Order(1008, "Ubileynaya 31e", "Ubileynaya 31e",
-                true, false, Cars.CLASS_BUSINESS));
-        testOrders.addFirst(new Order(1009, "Ubileynaya 31e", "Ubileynaya 31e",
-                false, true, Cars.CLASS_ECONOMIC));
+        for(int i=0; i <numberOfTestUsers; i++) {
+            testOrders.addFirst(new Order(1000, "Ubileynaya 31e", "Ubileynaya 31e",
+                    true, true, Cars.CLASS_BUSINESS));
+        }
+//            testOrders.addFirst(new Order(1001, "Ubileynaya 31e", "Ubileynaya 31e",
+//                    true, true, Cars.CLASS_BUSINESS));
+//            testOrders.addFirst(new Order(1002, "Ubileynaya 31e", "Ubileynaya 31e",
+//                    true, true, Cars.CLASS_BUSINESS));
+//            testOrders.addFirst(new Order(1003, "Ubileynaya 31e", "Ubileynaya 31e",
+//                    true, false, Cars.CLASS_ECONOMIC));
+//            testOrders.addFirst(new Order(1004, "Ubileynaya 31e", "Ubileynaya 31e",
+//                    false, false, Cars.CLASS_ECONOMIC));
+//            testOrders.addFirst(new Order(1005, "Ubileynaya 31e", "Ubileynaya 31e",
+//                    false, false, Cars.CLASS_ECONOMIC));
+//            testOrders.addFirst(new Order(1006, "Ubileynaya 31e", "Ubileynaya 31e",
+//                    true, true, Cars.CLASS_BUSINESS));
+//            testOrders.addFirst(new Order(1007, "Ubileynaya 31e", "Ubileynaya 31e",
+//                    true, true, Cars.CLASS_ECONOMIC));
+//            testOrders.addFirst(new Order(1008, "Ubileynaya 31e", "Ubileynaya 31e",
+//                    true, false, Cars.CLASS_BUSINESS));
+//            testOrders.addFirst(new Order(1009, "Ubileynaya 31e", "Ubileynaya 31e",
+//                    false, true, Cars.CLASS_ECONOMIC));
+
     }
 
     public static DataBase getInstance() {
@@ -80,11 +85,11 @@ public class DataBase {
         return drivers;
     }
 
-    public synchronized LinkedList<Order> getActualOrders() {
+    public LinkedList<Order> getActualOrders() {
         return actualOrders;
     }
 
-    public synchronized void addOrderFirst(Order order){
+    public void addOrderFirst(Order order){
         actualOrders.addFirst(order);
     }
 
@@ -94,5 +99,9 @@ public class DataBase {
 
     public LinkedList<Order> getTestOrders() {
         return testOrders;
+    }
+
+    public void setNumberOfTestUsers(int numberOfTestUsers) {
+        numberOfTestUsers = numberOfTestUsers;
     }
 }
